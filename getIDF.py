@@ -7,9 +7,9 @@ import jieba
 import sys
 import os
 
-file = open("839.txt","rb");
+'''file = open("839.txt","rb");'''
 
-outfile = open("IDFfile.txt","wb");
+
 '''l = file.readline();
 while l!="":
     ll = jieba.cut(l);
@@ -24,6 +24,20 @@ for d in dict:
 
 file.close();
 exit()'''
+
+stopFile = open("stopwords.txt","rb");
+stopWords = {};
+stopline = stopFile.readline();
+while stopline!="":
+    stopline = stopline.strip();
+    if not stopWords.has_key(stopline):
+        stopWords[stopline] = 1;
+    stopline = stopFile.readline();
+stopFile.close();
+
+
+
+outfile = open("IDFfile.txt","wb");
 
 path = "./Reduced";
 
@@ -49,6 +63,9 @@ for p in mainDoc:# Each subfile
             for w in j:
                 w = w.strip();
                 if w!="":
+                    if stopWords.has_key(str(w)):
+                        print str(w), w
+                        continue;
                     if not subDic.has_key(w):
                         subDic[w] = 1;
             line = infile.readline();
@@ -57,6 +74,7 @@ for p in mainDoc:# Each subfile
                 totalDic[s] += 1;
             else:
                 totalDic[s] = 1;
+        infile.close();
 
 outfile = open("IDFfile.txt","wb");
 outfile.write(str(fileSum));
