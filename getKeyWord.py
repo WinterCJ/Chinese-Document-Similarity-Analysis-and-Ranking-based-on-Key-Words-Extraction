@@ -36,6 +36,7 @@ mainDoc = os.listdir(path);
 outfileName = "docKeyWords.txt";
 ofile = open(outfileName,"wb");
 
+td = {};#for the use of get rid of redudence
 
 for p in mainDoc:# Each subfile
     if p[0]=='.':
@@ -73,62 +74,22 @@ for p in mainDoc:# Each subfile
         tfIdf = sorted(tfIdf.items(), key=lambda d:d[1], reverse=True);
         if len(tfIdf)==0:
             continue;
-        ofile.write(infile.name);
+        #ofile.write(p+"/"+n);
         ic = 0;
+        wl = "";
         for t in tfIdf:
             if ic>=16:
                 break;
             ic += 1;
-            ofile.write(" "+t[0]);
-        ofile.write("\n");
+            wl += " "+t[0]
+            #ofile.write(" "+t[0]);
+        if not td.has_key(wl):
+            ofile.write(p+"/"+n);
+            ofile.write(wl);
+            ofile.write("\n");
+            td[wl] = 1;
         infile.close();
 
 ofile.close();
 
 ################################
-
-
-
-'''fileN = "839.txt";
-infi = open(fileN, "rb");
-wordC = {};
-wordSum = 0;
-line = infi.readline();
-
-while line!="":
-    line = line.strip();
-    ls = jieba.cut(line);
-    for w in ls:
-        #Apply stop words here latter
-        w =w.strip();
-        if w=="":
-            continue;
-        wordSum += 1;
-        if wordC.has_key(w):
-            wordC[w] += 1;
-        else:
-            wordC[w] = 1;
-    line = infi.readline();
-
-tfIdf = {};
-print "sum", fileSum
-print "了", idfDic["了"]
-print "加剂", idfDic["加剂"]
-
-print idfDic.has_key("加剂")
-wordc2 = sorted(wordC.items(), key=lambda d:d[1], reverse=True);
-for t in wordc2:
-    print t[0], t[1]
-for w in wordC:
-    t=0;
-    print str(w), wordC[w],wordC.has_key(w)
-    print idfDic.has_key(str(w))
-    if idfDic.has_key(str(w)):
-
-        t = idfDic[str(w)];
-    tfIdf[w] = float(wordC[w])/float(wordSum)*float(math.log(float(fileSum)/float(t+1)));
-
-tfIdf = sorted(tfIdf.items(), key=lambda d:d[1], reverse=True);
-for t in tfIdf:
-    print t[0], t[1]'''
-
