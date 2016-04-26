@@ -6,6 +6,13 @@ import sys;
 reload(sys)
 sys.setdefaultencoding( "utf-8" )
 
+def is_num_by_execpt(num):
+    try:
+        float(num);
+        return True;
+    except ValueError:
+        return False;
+
 idfFile = open("IDFfile.txt","rb");
 
 line = idfFile.readline();
@@ -59,6 +66,8 @@ for p in mainDoc:# Each subfile
                     continue;
                 if stopWords.has_key(str(w)):
                     continue;
+                if is_num_by_execpt(str(w)):
+                    continue;
                 wordSum += 1;
                 if wordC.has_key(w):
                     wordC[w] += 1;
@@ -66,11 +75,12 @@ for p in mainDoc:# Each subfile
                     wordC[w] = 1;
             line = infile.readline();
         tfIdf = {};
+
         for w in wordC:
             t=0;
             if idfDic.has_key(str(w)):
                 t = idfDic[str(w)];
-            tfIdf[w] = float(wordC[w])/float(wordSum)*float(math.log(float(fileSum)/float(t+1)));
+            tfIdf[w] = (float(wordC[w])/float(wordSum) )  *float(math.log(float(fileSum)/float(t+1)));
         tfIdf = sorted(tfIdf.items(), key=lambda d:d[1], reverse=True);
         if len(tfIdf)==0:
             continue;
@@ -92,4 +102,4 @@ for p in mainDoc:# Each subfile
 
 ofile.close();
 
-################################
+print "Finished!"

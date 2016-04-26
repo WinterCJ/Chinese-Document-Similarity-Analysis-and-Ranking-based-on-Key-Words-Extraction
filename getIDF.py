@@ -4,26 +4,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding( "utf-8" )
 import jieba
-import sys
 import os
-
-'''file = open("839.txt","rb");'''
-
-
-'''l = file.readline();
-while l!="":
-    ll = jieba.cut(l);
-    for lll in ll:
-        outfile.write(lll)
-    l = file.readline();
-dic = {'a':31, 'bc':5, 'c':3, 'asd':4, 'aa':74, 'd':0}
-dict= sorted(dic.iteritems(), key=lambda d:d[1], reverse = True)
-for d in dict:
-    outfile.write(d[0]+" "+str(d[1])+"\n")
-
-
-file.close();
-exit()'''
 
 stopFile = open("stopwords.txt","rb");
 stopWords = {};
@@ -64,7 +45,7 @@ for p in mainDoc:# Each subfile
                 w = w.strip();
                 if w!="":
                     if stopWords.has_key(str(w)):
-                        print str(w), w
+                        #print str(w), w
                         continue;
                     if not subDic.has_key(w):
                         subDic[w] = 1;
