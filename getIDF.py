@@ -6,7 +6,7 @@ sys.setdefaultencoding( "utf-8" )
 import jieba
 import os
 
-stopFile = open("stopwords.txt","rb");
+stopFile = open("Stop_Words.txt","rb");
 stopWords = {};
 stopline = stopFile.readline();
 while stopline!="":

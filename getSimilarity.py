@@ -4,7 +4,7 @@ import sys;
 reload(sys)
 sys.setdefaultencoding( "utf-8" )
 
-infile = open("docKeyWords.txt","rb");
+infile = open("Demo_Corpus_KeyWords.txt","rb");
 
 line = infile.readline().strip();
 totalDic = {};
@@ -53,3 +53,5 @@ for t in range(0,len(totalL)):
     outfile.write("\n");
 
 outfile.close();
+
+print "Finished!"

@@ -1,13 +1,51 @@
 # -*- coding:utf-8 -*-
 
 import logging
+import sys
 from gensim import corpora, models, similarities
 
-datapath = "evaluation.txt"
-scorepath = "evaluationScore.txt"
-keypath = "docKeyWords.txt"
-oursimpath = "Similarity.txt"
-topN = 10
+oursimpath = sys.argv[1]
+
+
+if (oursimpath == "./Similarity.txt"):
+	scorepath = "Evaluation_Score_Cosine.txt"
+	datapath = "Evaluation_Similarity_List_Cosine.txt"
+if (oursimpath == "./Similarity_SimHash.txt"):
+	scorepath = "Evaluation_Score_SimHash.txt"
+	datapath = "Evaluation_Similarity_List_SimHash.txt"
+keypath = "Demo_Corpus_Duplicated.txt"
+reducedpath = "Demo_Corpus.txt"
+topN = 80
+
+def reduceFile(oursimpath, reducedpath):
+	wordList = []
+	newline = []
+	newlineName = []
+	filein = open(oursimpath, "rb")
+	readfile = filein.readlines()
+	for line in readfile:
+		line = line.strip('\n')
+		word = line.split()
+		wordList.append(word[0])
+
+	filein = open(reducedpath, "rb")
+	readfile = filein.readlines()
+	for line in readfile:
+		start = 0
+		while(1):
+			if line[start] == ' ':
+				break
+			start += 1
+		for i in range(len(wordList)):
+			if ( line[:start] == wordList[i] ):
+				newlineName.append(wordList[i])
+				newline.append(line[start+1:])
+	
+	fileout = open(keypath,"w+")
+	for i in range(len(newline)):
+		fileout.write(newlineName[i] + " " + newline[i])
+	filein.close()
+	fileout.close()
 
 def readKeyword():
 	txtName = []
@@ -105,7 +143,7 @@ def calculateScore(datapath, oursimpath, scorepath, cosineWeight):
 	e1List = []
 	e2List = []
 	weightSum = 0.0
-	for i in range(len(cosineWeight)):
+	for i in range(10):
 		weightSum += cosineWeight[i]
 	for i in e2:		
 		if i in e1:
@@ -124,6 +162,8 @@ def calculateScore(datapath, oursimpath, scorepath, cosineWeight):
 					score += e1ListDic[j]
 			if(score == 0.0):
 				filescore[i] = 0.0
+			if(score > weightSum):
+				filescore[i] = 1.0
 			else:
 				#filescore[i] = float(score)/725.0
 				#filescore[i] = float(score)/55.0
@@ -141,17 +181,21 @@ def calculateScore(datapath, oursimpath, scorepath, cosineWeight):
 	for i in range(len(filescore)):
 		fileout.write( str(filescore[i][0]) + ' ' + str(filescore[i][1]) + '\n')
 	fileout.close()
-	
+
+reduceFile(oursimpath, reducedpath)
+
 txtName, keysList = readKeyword()
 writeList = []
 cosineWeight = {}
 for i in range(topN):
 	cosineWeight[i] = 0.0
+
 for i in range(len(txtName)):
 	topList, cosineAvg = gensimCos(datapath, txtName, txtName[i], keysList[i], topN)
 	writeList.append(topList)
-	for i in range(topN):
-		cosineWeight[i] += cosineAvg[i]
+	for j in range(topN):
+		cosineWeight[j] += cosineAvg[j]
+	print"--------------------------------------------------------\n  Calculating No."+str(i+1)+" Document Cosine Similarity......\n--------------------------------------------------------"
 
 fileout = open(datapath,"w+")
 for i in range(len(writeList)):
@@ -159,3 +203,4 @@ for i in range(len(writeList)):
 fileout.close()
 
 calculateScore(datapath,oursimpath,scorepath,cosineWeight)
+print "Evaluation Finished!"

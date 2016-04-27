@@ -26,7 +26,7 @@ while line!="":
     line = idfFile.readline();
 idfFile.close();
 
-stopFile = open("stopwords.txt","rb");
+stopFile = open("Stop_Words.txt","rb");
 stopWords = {};
 stopline = stopFile.readline();
 while stopline!="":
@@ -41,7 +41,7 @@ path = "./corpus_reduced"
 
 mainDoc = os.listdir(path);
 
-outfileName = "docKeyWords.txt";
+outfileName = "Demo_Corpus_KeyWords.txt";
 ofile = open(outfileName,"wb");
 
 td = {};#for the use of get rid of redudence
