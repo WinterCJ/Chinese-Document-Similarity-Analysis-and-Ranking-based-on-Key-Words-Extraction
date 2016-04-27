@@ -17,10 +17,10 @@ while stopline!="":
 stopFile.close();
 
 
-
 outfile = open("IDFfile.txt","wb");
 
-path = "./Reduced";
+path = "./corpus";
+#path = "./corpus_reduced"
 
 mainDoc = os.listdir(path);
 
@@ -47,6 +47,8 @@ for p in mainDoc:# Each subfile
                     if stopWords.has_key(str(w)):
                         #print str(w), w
                         continue;
+                    if w=='\00':
+                        continue;
                     if not subDic.has_key(w):
                         subDic[w] = 1;
             line = infile.readline();
@@ -63,6 +65,8 @@ outfile.write(str(fileSum));
 totalDic = sorted(totalDic.iteritems(), key=lambda d:d[1], reverse=True);
 
 for t in totalDic:
+    if str(t[0]) == '\00':
+        continue
     outfile.write("\n");
     outfile.write(t[0]+"  "+str(t[1]))
 #print totalDic

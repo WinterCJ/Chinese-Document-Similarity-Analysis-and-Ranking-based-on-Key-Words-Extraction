@@ -35,7 +35,7 @@ for t in range(0,len(totalL)):
             if guestDic.has_key(k):
                 count += 1;
         topThree[guestFile] = count;
-        topThree = dict( (sorted(topThree.items(), key=lambda d:d[1], reverse=True))[:3] );
+        topThree = dict( (sorted(topThree.items(), key=lambda d:d[1], reverse=True))[:10] );
     for i in totalL[t+1: ]:
         guestFile = i[0];
         guestDic = i[1];
@@ -44,7 +44,7 @@ for t in range(0,len(totalL)):
             if guestDic.has_key(k):
                 count += 1;
         topThree[guestFile] = count;
-        topThree = dict( (sorted(topThree.items(), key=lambda d:d[1], reverse=True))[:3] );
+        topThree = dict( (sorted(topThree.items(), key=lambda d:d[1], reverse=True))[:10] );
 
     outfile.write(fn);
     topThree = (sorted(topThree.items(), key=lambda d:d[1], reverse=True));

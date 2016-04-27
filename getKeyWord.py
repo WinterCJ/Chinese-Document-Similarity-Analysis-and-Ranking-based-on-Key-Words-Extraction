@@ -36,7 +36,8 @@ while stopline!="":
     stopline = stopFile.readline();
 stopFile.close();
 
-path = "./Reduced";
+#path = "./corpus";
+path = "./corpus_reduced"
 
 mainDoc = os.listdir(path);
 
@@ -65,6 +66,8 @@ for p in mainDoc:# Each subfile
                 if w=="":
                     continue;
                 if stopWords.has_key(str(w)):
+                    continue;
+                if w=='\00':
                     continue;
                 if is_num_by_execpt(str(w)):
                     continue;
