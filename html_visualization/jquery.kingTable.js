@@ -144,7 +144,6 @@
         }
 
     }
-
     KingTable.prototype.renderTfoot = function(){
         var colNum = this.getColNum();
         if(!!this.options.foot){

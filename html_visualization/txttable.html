@@ -3,17 +3,28 @@
 <html>
 <head>
     <title>Paging Table</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="styles.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="demo.css" media="all" />
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
     <link rel="stylesheet" href="kingTable.css"/>
     <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="jquery.kingTable.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
+    <style type="text/css">
+    strong{
+        font-size: 20px;
+        font-family: Georgia;
+    }
+    </style>
 </head>
 
 <body>
 
-<div id="showDiv" style="position: absolute; background-color: white; border: 1px solid black;"></div>
-
+<div class="freshdesignweb-top"><strong>Top 3 Similar Files For Each Document From 500 Demo Documents</strong><span class="right"><a href="projecthome.html"> Back to Project Homepage </a> </span></div>
+<br/>
 <table id="kingTable" class="data-table"></table>
 <br/>
 <table id="kingTable2" class="data-table"></table>
@@ -32,7 +43,7 @@
                 "head":["File Name","Top Similar File","Second Similar File","Third Similar File"],   //必须 thead表头
                 "body":data,                                    //必须 tbody 后台返回的数据展示
                 "foot":true,                                    // true/false  是否显示tfoot --- 默认false
-                "displayNum": 15,                               //必须   默认 10  每页显示行数
+                "displayNum": 10,                               //必须   默认 10  每页显示行数
                 "groupDataNum":10,                             //可选    默认 10  组数
                 "clickEventCallBack":function(data_index,tr_index){ //可选 给tbody tr绑定事件回调
                     console.log("tr_index: "+tr_index+" data_index: "+data_index);
@@ -44,25 +55,11 @@
                 }
             }
             var cs = new KingTable(null,userOptions);
-            //$("#kingTable2").KingTable(userOptions)
 
-            $("#kingTable td").toggle(
-              function(){
-                var showDiv           = document.getElementById('showDiv');
-                showDiv.style.left    = event.clientX;
-                showDiv.style.top     = event.clientY;
-                showDiv.style.display = 'block';
-                showDiv.innerHTML     = $(this).text();
-                },
-              function(){
-                var showDiv           = document.getElementById('showDiv');
-                showDiv.style.display = 'none';
-                showDiv.innerHTML     = '';
-              }
-            );
+            //$("#kingTable2").KingTable(userOptions)
         })
     });
 </script>
-</script>
+
 </body>
 </html>
