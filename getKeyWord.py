@@ -105,4 +105,4 @@ for p in mainDoc:# Each subfile
 
 ofile.close();
 
-print "Finished!"
+print "------ Demo KeyWords Files is Generated, See it in: \"Demo_Corpus_KeyWords.txt\""

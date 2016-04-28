@@ -54,4 +54,4 @@ for t in range(0,len(totalL)):
 
 outfile.close();
 
-print "Finished!"
+print "------ Similarity Finished! See output in: \"Similarity.txt\""

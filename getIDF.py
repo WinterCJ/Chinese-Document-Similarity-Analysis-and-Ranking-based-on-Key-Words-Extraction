@@ -73,4 +73,4 @@ for t in totalDic:
 
 outfile.close();
 
-print "Finished!"
+print "------ IDF Files is Generated, See it in: \"IDFfile.txt\""

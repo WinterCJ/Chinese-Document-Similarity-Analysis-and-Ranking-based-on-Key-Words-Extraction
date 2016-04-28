@@ -115,4 +115,4 @@ for i in range(len(txtName)):
 
 hammingDistance(simhashcode)
 
-print "Finished!"
+print "------ SimHash Similarity Finished! See output in: \"Similarity_SimHash.txt\""

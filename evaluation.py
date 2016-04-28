@@ -4,13 +4,23 @@ import logging
 import sys
 from gensim import corpora, models, similarities
 
-oursimpath = sys.argv[1]
+print "------ Evaluation Program <Standard: Gensim Cosine Similarity>\n------ Demo Corpus Size: about 500 txt Files\n------ Estimated Time: 7min 52s\n------ Input 1 to evaluate our similarity program\n------ Input 2 to evaluate our simhash similarity program"
+while(1):
+	userargv = raw_input("------ Your Input is: ")
+	if ( userargv == "1" or userargv == "2"):
+		break
+	else:
+		print "------ Wrong Value, Please Input Again."
+userargv = int(userargv)
+# if userargv==1 means doing Similarity Evaluation
+# if userargv==2 means doing SimHash Similarity Evaluation
 
-
-if (oursimpath == "./Similarity.txt"):
-	scorepath = "Evaluation_Score_Cosine.txt"
-	datapath = "Evaluation_Similarity_List_Cosine.txt"
-if (oursimpath == "./Similarity_SimHash.txt"):
+if (userargv == 1):
+	oursimpath = "Similarity.txt"
+	scorepath = "Evaluation_Score.txt"
+	datapath = "Evaluation_Similarity_List.txt"
+if (userargv == 2):
+	oursimpath = "Similarity_SimHash.txt"
 	scorepath = "Evaluation_Score_SimHash.txt"
 	datapath = "Evaluation_Similarity_List_SimHash.txt"
 keypath = "Demo_Corpus_Duplicated.txt"
@@ -203,4 +213,8 @@ for i in range(len(writeList)):
 fileout.close()
 
 calculateScore(datapath,oursimpath,scorepath,cosineWeight)
-print "Evaluation Finished!"
+
+if (userargv == 1):
+	print "------ Evaluation Finished! See Score in: \"Evaluation_Score.txt\""	
+if (userargv == 2):
+	print "------ Evaluation Finished! See Score in: \"Evaluation_Score_SimHash.txt\""
