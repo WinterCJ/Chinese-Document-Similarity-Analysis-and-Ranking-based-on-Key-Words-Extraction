@@ -1,5 +1,11 @@
 ## Chinese Document Similarity Analysis and Ranking <br> based on Key Words Extraction
 
+###Project HomePage:
+***[Link to Project HomePage](http://www-scf.usc.edu/~yunjiezh/csci544/projecthome.html)*** <br>
+You can link to our Project Homepage to see the Visualization of Demo Corpus Similarity Output 
+
+<hr>
+
 ###Corpus:
 **./corpus**: 　　　　　17,910 txt Chinese News Files From [Sogou Lab Data](http://www.sogou.com/labs/dl/c.html) <br>
 **./corpus/reduced**: 　about 500 txt Files for Demo Test <br>
