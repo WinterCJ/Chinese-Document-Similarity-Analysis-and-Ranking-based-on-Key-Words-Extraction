@@ -1,8 +1,8 @@
 import re
 
-filenameI = 'Similarity.txt'
-#filenameI = 'evaluation.txt'
-filenameI2 = 'docKeyWords.txt'
+#filenameI = 'Similarity.txt'
+filenameI = 'Evaluation_Similarity_List.txt'
+filenameI2 = 'Demo_Corpus_KeyWords.txt'
 
 fin = open(filenameI,'rb')
 fin2 = open(filenameI2,'rb')
@@ -66,8 +66,8 @@ for line in readfile2:
 	keyWords.append(key)
 	lineNo += 1
 
-filenameO = 'similarity.json'
-#filenameO = 'similarityGensim.json'
+#filenameO = 'similarity.json'
+filenameO = 'similarityGensim.json'
 fout = open(filenameO,'w+')
 
 fout.write('{\n')
